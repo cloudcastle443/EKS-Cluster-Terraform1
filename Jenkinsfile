@@ -16,10 +16,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {                 
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], 
-                              userRemoteConfigs: [[credentialsId: 'Github-Integration', 
-                              url: 'https://github.com/cloudcastle443/EKS-Cluster-Terraform.git']]])
+                script {
+                    checkout scmGit(
+                        branches: [[name: '*/main']], 
+                        extensions: [], 
+                        userRemoteConfigs: [[credentialsId: 'Github-Integration', url: 'https://github.com/cloudcastle443/EKS-Cluster-Terraform1.git']]
+                    )
                 }
             }
         }
