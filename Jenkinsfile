@@ -28,7 +28,7 @@ pipeline {
 
         stage('checkout') {
             steps {
-                dir('/opt/jenkins/workspace') {
+                dir('/var/lib/jenkins/workspace') {
                     withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), 
                                      string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh 'terraform init'
@@ -40,7 +40,7 @@ pipeline {
         stage('Terraform Action') {
             steps {
                 script {
-                    dir('/opt/jenkins/workspace') {
+                    dir('/var/lib/jenkins/workspace') {
                         if (params.TERRAFORM_ACTION == 'apply') {
                             sh 'terraform apply -auto-approve'
                         } else if (params.TERRAFORM_ACTION == 'destroy') {
