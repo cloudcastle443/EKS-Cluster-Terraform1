@@ -26,9 +26,9 @@ pipeline {
             }
         }
 
-        stage('/opt/jenkins/workspace') {
+        stage('checkout') {
             steps {
-                dir('EKS-Cluster-Terraform') {
+                dir('/opt/jenkins/workspace') {
                     withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), 
                                      string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh 'terraform init'
