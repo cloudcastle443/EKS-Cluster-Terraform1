@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Init') {
+        stage('/opt/jenkins/workspace') {
             steps {
                 dir('EKS-Cluster-Terraform') {
                     withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), 
@@ -40,7 +40,7 @@ pipeline {
         stage('Terraform Action') {
             steps {
                 script {
-                    dir('EKS-Cluster-Terraform') {
+                    dir('/opt/jenkins/workspace') {
                         if (params.TERRAFORM_ACTION == 'apply') {
                             sh 'terraform apply -auto-approve'
                         } else if (params.TERRAFORM_ACTION == 'destroy') {
